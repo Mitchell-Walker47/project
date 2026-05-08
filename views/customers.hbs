@@ -1,0 +1,35 @@
+<h1>Customers</h1>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>customerID</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>phoneNumber</th>
+            <th>streetAddress</th>
+            <th>city</th>
+            <th>state</th>
+            <th>zipCode</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each customers}}
+            <tr>
+                <td>{{this.customerID}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.lastName}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phoneNumber}}</td>
+                <td>{{this.streetAddress}}</td>
+                <td>{{this.city}}</td>
+                <td>{{this.state}}</td>
+                <td>{{this.zipCode}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>

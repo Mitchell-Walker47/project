@@ -55,6 +55,27 @@ app.get('/bsg-people', async function (req, res) {
     }
 });
 
+app.get('/customers', async function (req, res) {
+    try {
+
+        const query1 = 'SELECT * FROM Customers;';
+        const [customers] = await db.query(query1);
+
+        res.render('customers', { customers: customers });
+
+    } catch (error) {
+        console.error('error executing Customers Query: ', error);
+        res.status(500).send('An error occurred while loading Customers.');
+
+}
+
+})
+
+
+
+
+
+
 // ########################################
 // ########## LISTENER
 
