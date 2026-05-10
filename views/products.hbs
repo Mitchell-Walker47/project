@@ -1,0 +1,44 @@
+{{!--
+    Citation for starter code used in this file:
+    Date Retrieved: 05/05/2026
+    Adapted from: CS340 Node.js starter code
+    Source: Oregon State University CS340 Exploration - Web Application Technology
+    Type: Handlebars template / starter code
+
+    Original bsg-people page syntax and structure was adapted into products entity page.
+--}} 
+
+<!-- Products Table Display -->
+<h1>Products</h1>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>productID</th>
+            <th>productName</th>
+            <th>category</th>
+            <th>brand</th>
+            <th>price</th>
+            <th>stockQuantity</th>
+            <th>description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each products}}
+            <tr>
+                <td>{{this.productID}}</td>
+                <td>{{this.productName}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.brand}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.stockQuantity}}</td>
+                <td>{{this.description}}</td>
+            </tr>
+        {{/each}}
+
+    </tbody>
+
+</table>

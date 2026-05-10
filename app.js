@@ -1,3 +1,15 @@
+/*
+    Citation for starter code used in this file:
+    Date Retrieved: 05/03/2026
+    Adapted from: CS340 Node.js starter code
+    Source: Oregon State University CS340 Exploration - Web Application Technology
+    Type: starter code
+
+    Notes:
+    Original BSG example routes adapted into project-specific routes
+    such as Customers.
+*/
+
 // ########################################
 // ########## SETUP
 
@@ -70,11 +82,78 @@ app.get('/customers', async function (req, res) {
 }
 
 })
+app.get('/suppliers', async function (req, res) {
+    try {
+
+        const query1 = 'SELECT * FROM Suppliers;';
+        const [suppliers] = await db.query(query1);
+
+        res.render('suppliers', { suppliers: suppliers });
+
+    } catch (error) {
+        console.error('Error executing Suppliers query:', error);
+        res.status(500).send('An error occurred while loading Suppliers.');
+    }
+});
+
+app.get('/products', async function (req, res) {
+    try {
+
+        const query1 = 'SELECT * FROM Products;';
+        const [products] = await db.query(query1);
+
+        res.render('products', { products: products });
+        
+    } catch (error) {
+        console.error('Error executing products query:', error);
+        res.status(500).send('An error occurred while loading products.');
+    }
+});
 
 
+app.get('/orders', async function (req, res) {
+    try {
+
+        const query1 = 'SELECT * FROM Orders;';
+        const [orders] = await db.query(query1);
+
+        res.render('orders', { orders: orders });
+        
+    } catch (error) {
+        console.error('Error executing orders query:', error);
+        res.status(500).send('An error occurred while loading orders.');
+    }
+});
 
 
+app.get('/orderitems', async function (req, res) {
+    try {
 
+        const query1 = 'SELECT * FROM OrderItems;';
+        const [orderitems] = await db.query(query1);
+
+        res.render('orderitems', {orderitems: orderitems });
+        
+    } catch (error) {
+        console.error('Error executing orderitems query:', error);
+        res.status(500).send('An error occurred while loading orders.');
+    }
+});
+
+
+app.get('/supplierproducts', async function (req, res) {
+    try {
+
+        const query1 = 'SELECT * FROM SupplierProducts;';
+        const [supplierproducts] = await db.query(query1);
+
+        res.render('supplierproducts', {supplierproducts: supplierproducts });
+        
+    } catch (error) {
+        console.error('Error executing supplierproducts query:', error);
+        res.status(500).send('An error occurred while loading orders.');
+    }
+});
 
 // ########################################
 // ########## LISTENER

@@ -1,0 +1,36 @@
+{{!--
+    Citation for starter code used in this file:
+    Date Retrieved: 05/05/2026
+    Adapted from: CS340 Node.js starter code
+    Source: Oregon State University CS340 Exploration - Web Application Technology
+    Type: Handlebars template / starter code
+
+    Original bsg-people page syntax and structure was adapted into supplierProducts entity page.
+--}} 
+
+<!-- SupplierProducts Table Display -->
+<h1>SupplierProducts</h1>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>supplierProductID</th>
+            <th>supplierID</th>
+            <th>productID</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each supplierproducts}}
+            <tr>
+                <td>{{this.supplierProductID}}</td>
+                <td>{{this.supplierID}}</td>
+                <td>{{this.productID}}</td>
+            </tr>
+        {{/each}}
+
+    </tbody>
+
+</table>

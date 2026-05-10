@@ -1,0 +1,40 @@
+{{!--
+    Citation for starter code used in this file:
+    Date Retrieved: 05/05/2026
+    Adapted from: CS340 Node.js starter code
+    Source: Oregon State University CS340 Exploration - Web Application Technology
+    Type: Handlebars template / starter code
+
+    Original bsg-people page syntax and structure was adapted into orders entity page.
+--}} 
+
+<!-- Orders Table Display -->
+<h1>Orders</h1>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>orderID</th>
+            <th>customerID</th>
+            <th>orderDate</th>
+            <th>totalAmount</th>
+            <th>orderStatus</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each orders}}
+            <tr>
+                <td>{{this.orderID}}</td>
+                <td>{{this.customerID}}</td>
+                <td>{{this.orderDate}}</td>
+                <td>{{this.totalAmount}}</td>
+                <td>{{this.orderStatus}}</td>
+            </tr>
+        {{/each}}
+
+    </tbody>
+
+</table>
