@@ -15,11 +15,12 @@
 
     <thead>
         <tr>
-            <th>orderID</th>
-            <th>customerID</th>
-            <th>orderDate</th>
-            <th>totalAmount</th>
-            <th>orderStatus</th>
+            <th>Order ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Order Status</th>
         </tr>
     </thead>
 
@@ -28,7 +29,8 @@
         {{#each orders}}
             <tr>
                 <td>{{this.orderID}}</td>
-                <td>{{this.customerID}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.lastName}}</td>
                 <td>{{this.orderDate}}</td>
                 <td>{{this.totalAmount}}</td>
                 <td>{{this.orderStatus}}</td>
@@ -38,3 +40,28 @@
     </tbody>
 
 </table>
+
+<!-- CRUD Actions Template !-->
+
+<h2>Update Order</h2>
+
+<form method="POST" action="/update-order">
+
+    <label for="update-orderID">Order ID:</label>
+    <input type="text" name="update-orderID" id="update-orderID">
+
+    <label for="update-customerID">Customer ID:</label>
+    <input type="text" name="update-customerID" id="update-customerID">
+
+    <label for="update-orderDate">Order Date:</label>
+    <input type="date" name="update-orderDate" id="update-orderDate">
+
+    <label for="update-totalAmount">Total Amount:</label>
+    <input type="text" name="update-totalAmount" id="update-totalAmount">
+
+    <label for="update-orderStatus">Order Status:</label>
+    <input type="text" name="update-orderStatus" id="update-orderStatus">
+
+    <input type="submit">
+
+</form>

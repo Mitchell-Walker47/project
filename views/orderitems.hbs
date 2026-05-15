@@ -16,10 +16,12 @@
 
     <thead>
         <tr>
-            <th>orderItemID</th>
-            <th>orderID</th>
-            <th>productID</th>
-            <th>quantity</th>
+            <th>Order Item ID</th>
+            <th>Order ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
         </tr>
     </thead>
 
@@ -29,7 +31,9 @@
             <tr>
                 <td>{{this.orderItemID}}</td>
                 <td>{{this.orderID}}</td>
-                <td>{{this.productID}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.lastName}}</td>
+                <td>{{this.productName}}</td>
                 <td>{{this.quantity}}</td>
             </tr>
         {{/each}}
@@ -37,4 +41,25 @@
     </tbody>
 
 </table>
-</table>
+
+
+<!-- CRUD Actions Template !-->
+<h2>Update OrderItem</h2>
+
+<form method="POST" action="/update-orderitem">
+
+    <label for="update-orderItemID">Order Item ID:</label>
+    <input type="text" name="update-orderItemID" id="update-orderItemID">
+
+    <label for="update-orderID">Order ID:</label>
+    <input type="text" name="update-orderID" id="update-orderID">
+
+    <label for="update-productID">Product ID:</label>
+    <input type="text" name="update-productID" id="update-productID">
+
+    <label for="update-quantity">Quantity:</label>
+    <input type="text" name="update-quantity" id="update-quantity">
+
+    <input type="submit">
+
+</form>

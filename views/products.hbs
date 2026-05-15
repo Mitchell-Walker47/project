@@ -15,13 +15,13 @@
 
     <thead>
         <tr>
-            <th>productID</th>
-            <th>productName</th>
-            <th>category</th>
-            <th>brand</th>
-            <th>price</th>
-            <th>stockQuantity</th>
-            <th>description</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th>Description</th>
         </tr>
     </thead>
 
@@ -42,3 +42,24 @@
     </tbody>
 
 </table>
+
+<!-- CRUD Actions Template !-->
+<h2>Add Product</h2>
+
+<form method="POST" action="/add-product">
+
+    <label for="input-productName">Product Name:</label>
+    <input type="text" name="input-productName" id="input-productName">
+
+    <label for="input-category">Category:</label>
+    <input type="text" name="input-category" id="input-category">
+
+    <label for="input-brand">Brand:</label>
+    <input type="text" name="input-brand" id="input-brand">
+
+    <label for="input-price">Price:</label>
+    <input type="text" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>

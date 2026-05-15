@@ -44,6 +44,8 @@ app.get('/', async function (req, res) {
     }
 });
 
+// While we removed bsg people from homepage, the code for it is a good reference
+// code to work off of right now. though it will be removed later for final part
 app.get('/bsg-people', async function (req, res) {
     try {
         // Create and execute our queries
@@ -66,30 +68,36 @@ app.get('/bsg-people', async function (req, res) {
         );
     }
 });
+//----------------------------------------------------------------------------
 
 app.get('/customers', async function (req, res) {
     try {
+        const query1 = `
+        SELECT customerID, firstName, lastName, email, phoneNumber,
+               streetAddress, city, state, zipCode
+        FROM Customers;
+        `;
 
-        const query1 = 'SELECT * FROM Customers;';
         const [customers] = await db.query(query1);
 
         res.render('customers', { customers: customers });
-
     } catch (error) {
         console.error('error executing Customers Query: ', error);
         res.status(500).send('An error occurred while loading Customers.');
+    }
+});
 
-}
-
-})
 app.get('/suppliers', async function (req, res) {
     try {
+        const query1 = `
+        SELECT supplierID, supplierName, contactName, email,
+               phoneNumber, address
+        FROM Suppliers;
+        `;
 
-        const query1 = 'SELECT * FROM Suppliers;';
         const [suppliers] = await db.query(query1);
 
         res.render('suppliers', { suppliers: suppliers });
-
     } catch (error) {
         console.error('Error executing Suppliers query:', error);
         res.status(500).send('An error occurred while loading Suppliers.');
@@ -98,12 +106,15 @@ app.get('/suppliers', async function (req, res) {
 
 app.get('/products', async function (req, res) {
     try {
+        const query1 = `
+        SELECT productID, productName, category, brand, price,
+               stockQuantity, description
+        FROM Products;
+        `;
 
-        const query1 = 'SELECT * FROM Products;';
         const [products] = await db.query(query1);
 
         res.render('products', { products: products });
-        
     } catch (error) {
         console.error('Error executing products query:', error);
         res.status(500).send('An error occurred while loading products.');
@@ -113,10 +124,18 @@ app.get('/products', async function (req, res) {
 
 app.get('/orders', async function (req, res) {
     try {
-
-        const query1 = 'SELECT * FROM Orders;';
+        const query1 = `
+        SELECT Orders.orderID,
+            Customers.firstName,
+            Customers.lastName,
+            Orders.orderDate,
+            Orders.totalAmount,
+            Orders.orderStatus
+        FROM Orders
+        INNER JOIN Customers
+        ON Orders.customerID = Customers.customerID`;
+        
         const [orders] = await db.query(query1);
-
         res.render('orders', { orders: orders });
         
     } catch (error) {
@@ -128,8 +147,18 @@ app.get('/orders', async function (req, res) {
 
 app.get('/orderitems', async function (req, res) {
     try {
-
-        const query1 = 'SELECT * FROM OrderItems;';
+    const query1 = `
+        SELECT OrderItems.orderItemID,
+            Orders.orderID,
+            Customers.firstName,
+            Customers.lastName,
+            Products.productName,
+            OrderItems.quantity
+        FROM OrderItems
+        INNER JOIN Orders ON OrderItems.orderID = Orders.orderID
+        INNER JOIN Customers ON Orders.customerID = Customers.customerID
+        INNER JOIN Products ON OrderItems.productID = Products.productID;
+`;
         const [orderitems] = await db.query(query1);
 
         res.render('orderitems', {orderitems: orderitems });
@@ -143,10 +172,15 @@ app.get('/orderitems', async function (req, res) {
 
 app.get('/supplierproducts', async function (req, res) {
     try {
-
-        const query1 = 'SELECT * FROM SupplierProducts;';
+        const query1 = `
+        SELECT SupplierProducts.supplierProductID,
+            Suppliers.supplierName,
+            Products.productName
+        FROM SupplierProducts
+        INNER JOIN Suppliers ON SupplierProducts.supplierID = Suppliers.supplierID
+        INNER JOIN Products ON SupplierProducts.productID = Products.productID;
+`;
         const [supplierproducts] = await db.query(query1);
-
         res.render('supplierproducts', {supplierproducts: supplierproducts });
         
     } catch (error) {
