@@ -1,0 +1,22 @@
+Hey guys, I put together the SQL/backend portion for Step 4.
+
+My username/ONID is: rolande
+Email: rolande@oregonstate.edu
+
+What I included:
+- DDL.sql with the RESET stored procedure
+- DML.sql with SELECT queries for all entities
+- PL.sql with one DELETE demo stored procedure
+- app.js backend routes
+- database/db-connector.js for MySQL connection
+- .env.example with my username filled in
+- README explaining how to run and test RESET
+
+The RESET test flow is:
+1. Go to Customers and confirm Maya Johnson is there.
+2. Click Delete Demo Customer.
+3. Confirm Maya Johnson is gone.
+4. Click RESET Database.
+5. Confirm Maya Johnson comes back.
+
+This should cover the SQL/backend part of the Step 4 rubric: RESET procedure, SELECTs for all entities, and one CUD operation to demonstrate RESET.
