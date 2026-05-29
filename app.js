@@ -86,6 +86,24 @@ app.get('/customers', async function (req, res) {
         res.status(500).send('An error occurred while loading Customers.');
     }
 });
+// This is what makes the delete buttons in customers page functional
+app.post('/customers/delete', async function (req, res) {
+    try {
+        const customerID = req.body.customerID;
+
+        const deleteQuery = `
+            DELETE FROM Customers
+            WHERE customerID = ?;
+        `;
+
+        await db.query(deleteQuery, [customerID]);
+
+        res.redirect('/customers');
+    } catch (error) {
+        console.error('Error deleting Customer:', error);
+        res.status(500).send('An error occurred while deleting the customer.');
+    }
+});
 
 app.get('/suppliers', async function (req, res) {
     try {
@@ -188,14 +206,14 @@ app.get('/supplierproducts', async function (req, res) {
         res.status(500).send('An error occurred while loading orders.');
     }
 });
-
+// This is what makes the delete buttons in supplierproducts page functional
 app.post('/supplierproducts/delete', async function (req, res) {
     try {
         const supplierProductID = req.body.supplierProductID;
 
         const deleteQuery = `
             DELETE FROM SupplierProducts
-            WHERE suplierProductID = ?;
+            WHERE supplierProductID = ?;
 `;
 
         await db.query(deleteQuery, [supplierProductID]);
@@ -206,6 +224,41 @@ app.post('/supplierproducts/delete', async function (req, res) {
         res.status(500).send('An error occured while deleting the supplier product');
     }
 });
+
+// /reset was made from Eddie's app.js code
+app.get('/reset', async function (req, res) {
+    try {
+        await db.query('CALL sp_reset_computer_parts_store();');
+
+        res.send(`
+            <h1>Database RESET Complete</h1>
+            <p>The schema and sample data were rebuilt by calling <code>sp_reset_computer_parts_store()</code>.</p>
+            <p><a href="/customers">View Customers</a></p>
+`);
+    } catch (error) {
+        console.error('Error executing RESET procedure:', error);
+        res.status(500).send('An error occurred while resetting the database.');
+    }
+});
+
+// /demo-delete-customer was made from Eddie's app.js code
+app.get('/demo-delete-customer', async function (req, res) {
+    try {
+        await db.query('CALL sp_delete_demo_customer();');
+
+        res.send(`
+            <h1>Delete Demo Complete</h1>
+            <p>The demo DELETE procedure ran. Maya Johnson should now be removed from Customers.</p>
+            <p>Use RESET to restore the original sample data.</p>
+            <p><a href="/customers">View Customers</a></p>
+`);
+    } catch (error) {
+        console.error('Error executing demo delete procedure:', error);
+        res.status(500).send('An error occurred while deleting the demo customer.');
+    }
+});
+
+
 
 // ########################################
 // ########## LISTENER

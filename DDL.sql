@@ -5,9 +5,15 @@
 -- Instructor: Michael Curry
 -- DDL.sql - creates tables and inserts sample data
 
+DROP PROCEDURE IF EXISTS sp_reset_computer_parts_store;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_reset_computer_parts_store()
+BEGIN
+
 SET FOREIGN_KEY_CHECKS = 0;
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+
 
 DROP TABLE IF EXISTS SupplierProducts;
 DROP TABLE IF EXISTS OrderItems;
@@ -148,4 +154,8 @@ INSERT INTO SupplierProducts (supplierID, productID) VALUES
 ((SELECT supplierID FROM Suppliers WHERE supplierName = 'Cascade Computer Parts'),
  (SELECT productID FROM Products WHERE productName = '32GB DDR5 Memory Kit'));
 
-COMMIT;
+END //
+
+DELIMITER ;
+
+CALL sp_reset_computer_parts_store();

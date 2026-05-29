@@ -26,6 +26,7 @@
             <th>City</th>
             <th>State</th>
             <th>Zip Code</th>
+            <th>Actions</th>  <!-- Delete Button -->
         </tr>
     </thead>
 
@@ -41,6 +42,14 @@
                 <td>{{this.city}}</td>
                 <td>{{this.state}}</td>
                 <td>{{this.zipCode}}</td>
+                <td><!-- Display Delete Button on each row-->
+                    <form class="delete-form" action="/customers/delete" method="POST"> 
+                        <input type="hidden" name="customerID" value="{{this.customerID}}">
+                        <button type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </td>
             </tr>
         {{/each}}
     </tbody>
