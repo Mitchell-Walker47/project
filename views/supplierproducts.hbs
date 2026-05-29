@@ -18,6 +18,7 @@
             <th>Supplier Product ID</th>
             <th>Supplier Name</th>
             <th>Product Name</th>
+            <th>Actions</th>  <!-- Delete Button -->
         </tr>
     </thead>
 
@@ -28,9 +29,18 @@
                 <td>{{this.supplierProductID}}</td>
                 <td>{{this.supplierName}}</td>
                 <td>{{this.productName}}</td>
+                    <!-- DELETE Buttom, with delete-form for CSS styling -->
+                <td>
+                    <form class="delete-form" action="/supplierproducts/delete" method="POST">
+                        <input type="hidden" name="supplierProductID" value="{{this.supplierProductID}}">
+                        <button type="submit">
+                            Delete
+                        </button> 
+                    </form>
+                </td>
             </tr>
         {{/each}}
-
+        
     </tbody>
 
 </table>
@@ -38,8 +48,8 @@
 
 <!-- CRUD Actions Template !-->
 <h2>Update SupplierProduct Relationship</h2>
-
-<form method="POST" action="/update-supplierproduct">
+<!-- class 'crud form' is used for specific CSS styling-->
+<form class="crud-form" method="POST" action="/update-supplierproduct">
 
     <label for="update-supplierProductID">Supplier Product ID:</label>
     <input type="text" name="update-supplierProductID" id="update-supplierProductID">

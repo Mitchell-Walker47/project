@@ -189,6 +189,24 @@ app.get('/supplierproducts', async function (req, res) {
     }
 });
 
+app.post('/supplierproducts/delete', async function (req, res) {
+    try {
+        const supplierProductID = req.body.supplierProductID;
+
+        const deleteQuery = `
+            DELETE FROM SupplierProducts
+            WHERE suplierProductID = ?;
+`;
+
+        await db.query(deleteQuery, [supplierProductID]);
+
+        res.redirect('/supplierproducts');
+    } catch (error) {
+        console.error('Error deleting SupplierProduct:', error);
+        res.status(500).send('An error occured while deleting the supplier product');
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
